@@ -166,8 +166,8 @@ def decrypt(args: argparse.Namespace, config: configparser.ConfigParser, console
                 if decryption_successful and args.delete:
                     os.remove(os.path.join(path, file))
                 if args.sort:
-                    utils.sort.sort_and_label(dumped_ipa, args.output_path, console)
+                    utils.sort.sort_and_label(args, dumped_ipa, args.output_path, console)
             except Exception as e:
                 console.log(f"[red bold] Error occured while decrypting: {e}")
-                #console.print_exception(show_locals=True)
+                if args.debug: console.print_exception(show_locals=True)
     console.log("All done!")
