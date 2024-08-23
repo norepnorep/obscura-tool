@@ -1,0 +1,3 @@
+paramiko
+macholib
+rich
