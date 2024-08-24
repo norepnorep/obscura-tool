@@ -5,7 +5,7 @@ import utils.decrypt
 import utils.sort
 from rich.console import Console
 
-VERSION = '2024.8.1'
+VERSION = '2024.8.2'
 
 console = Console(log_path=False)
 config = configparser.ConfigParser()
