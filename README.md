@@ -10,6 +10,9 @@ set the IP address, port and credentials of your devices' SSH server in config.c
 to decrypt using the iOS 6 bypass method, you need to have a jailbroken device with the Activator, AppStoreFix and iTunesStoreX tweaks installed
 your device must be attached to your computer via a USB cable that supports data transfer
 
+## linux/macos
+for linux/macos make sure to install the libimobiledevice package for your system that includes `ideviceinstaller`
+
 ## windows
 to run on windows, you also need to put the [windows binaries for libimobiledevice](https://github.com/L1ghtmann/libimobiledevice/releases/) in the "libimobiledevice" folder, alongside all the DLLs
 

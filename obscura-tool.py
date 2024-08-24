@@ -41,6 +41,3 @@ if args.command == 'decrypt':
     utils.decrypt.decrypt(args, config, console)
 elif args.command == 'sort':
     utils.sort.sort_and_label_batch(args, config, console)
-
-print(args)
-print(dict(config['decryption-device']))
