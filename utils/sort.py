@@ -11,11 +11,12 @@ from rich.console import Console
 import utils.common
 
 def sort_and_label(args: argparse, path_to_ipa: str, output_path: str, console: Console):
+    dupe_count = 0
     if path_to_ipa is None:
         return
     try:
         extracted_ipa = utils.common.extract_ipa(path_to_ipa, console)
-        properties = utils.common.get_app_properties(extracted_ipa, console)
+        properties = utils.common.get_app_properties(extracted_ipa, False, console)
         executable = glob.glob(os.path.join(extracted_ipa, 'Payload', '*.app', properties.get("CFBundleExecutable")))[0]
         
         cryptid = get_cryptid(executable)
@@ -43,11 +44,13 @@ def sort_and_label(args: argparse, path_to_ipa: str, output_path: str, console: 
         os.makedirs(path_tree, exist_ok=True)
         if os.path.exists(os.path.join(path_tree, obscura_filename)):
             console.log("IPA is a duplicate, won't move...")
+            dupe_count += 1
         else:
             shutil.move(path_to_ipa, os.path.join(path_tree, obscura_filename))
     except Exception as e:
         console.log(f"[bold red]An error occurred sorting {path_to_ipa}: {e}")
         if args.debug: console.print_exception(show_locals=True)
+    return dupe_count
     
 def get_cryptid(executable: str) -> bool:
     macho = macholib.MachO.MachO(executable)
@@ -106,7 +109,7 @@ def sort_and_label_batch(args: argparse.ArgumentParser, config: configparser.Con
         for file in files:
             total += 1
             try:
-                sort_and_label(args, os.path.join(path, file), args.output_path, console)
+                dupe_count += sort_and_label(args, os.path.join(path, file), args.output_path, console)
             except Exception as e:
                 error_count += 1
                 console.log(f"[bold red] Error occurred while sorting {file}: {e}")

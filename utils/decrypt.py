@@ -148,7 +148,7 @@ def decrypt(args: argparse.Namespace, config: configparser.ConfigParser, console
         for file in files:
             try:
                 extracted_ipa = utils.common.extract_ipa(os.path.join(path, file), console)
-                properties = utils.common.get_app_properties(extracted_ipa, console)
+                properties = utils.common.get_app_properties(extracted_ipa, True, console)
 
                 install_ipa(os.path.join(path, file), ssh_client, properties, console)
 
