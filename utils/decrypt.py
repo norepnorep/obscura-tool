@@ -72,8 +72,13 @@ def decrypt_app(args: argparse.ArgumentParser, config: configparser.ConfigParser
 
             console.log(f"\t[bold yellow]Sending command \'killall {properties.get('CFBundleExecutable')}\'")
             ssh_client.exec_command(f"killall {properties.get('CFBundleExecutable')}")
-
             time.sleep(1)
+
+            if args.respring:
+                console.log("\t[bold yellow]Sending command \'killall backboardd'")
+                ssh_client.exec_command("killall backboardd")
+                time.sleep(10)
+            
     console.log(f"[bold red]Decryption attempts exausted for {properties.get('CFBundleIdentifier')}")
     return False
 

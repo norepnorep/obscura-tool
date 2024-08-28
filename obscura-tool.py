@@ -21,6 +21,7 @@ parser_decrypt.add_argument('-i','--input-path', help="Directory to search for e
 parser_decrypt.add_argument('-o','--output-path', help="Directory to output decrypted iPA files", required=True)
 parser_decrypt.add_argument('-s', '--sort', action="store_true", help='Sort, label and organize decrypted iPA files using the Obscura format')
 parser_decrypt.add_argument('-d', '--delete', action="store_true", help='Delete encrypted iPA files after decrypting')
+parser_decrypt.add_argument('-r', '--respring', action="store_true", help='Resprings the device after a failed bypass attempt. Takes longer but is more reliable.')
 parser_decrypt.add_argument('--attempts', type=int, default=10, help='Number of attempts to perform the iOS 6 bypass trick')
 parser_decrypt.add_argument('--no-bypass', action='store_true', help='Attempt to decrypt without performing the iOS 6 bypas. Use this for decrypting iPAs tied to your devices AppleID.')
 
